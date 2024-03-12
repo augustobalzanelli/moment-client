@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:moment/core/constants/lottie_assets.dart';
+import 'package:moment/features/authentication/presentation/views/registration_confirmation_view.dart';
 import 'package:moment/features/authentication/presentation/views/registration_view.dart';
 import 'package:moment/shared/widgets/buttons.dart';
 
@@ -148,7 +149,7 @@ class VerificationView extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const RegistrationView(),
+                builder: (context) => const RegistrationConfirmationView(),
               ),
             );
           },
