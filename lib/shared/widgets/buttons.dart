@@ -11,9 +11,11 @@ class AButtonStyles {
 
 class AFilledButton extends StatelessWidget {
   final String title;
+  final VoidCallback onTap;
 
   const AFilledButton({
     required this.title,
+    required this.onTap,
     super.key,
   });
 
@@ -26,6 +28,8 @@ class AFilledButton extends StatelessWidget {
         color: AAppColors.primaryColor,
       ),
       child: InkWell(
+        borderRadius: AButtonStyles.borderRadius,
+        onTap: onTap,
         child: Center(
           child: Text(
             title,
@@ -61,6 +65,39 @@ class ATextButton extends StatelessWidget {
           style: TextStyle(
             fontSize: titleSize ?? AButtonStyles.fontSize,
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class AContainedIconButton extends StatelessWidget {
+  final Widget icon;
+  const AContainedIconButton({
+    required this.icon,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Ink(
+      height: 44.0,
+      width: 44.0,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Colors.black12,
+          width: 0.5,
+        ),
+        borderRadius: BorderRadius.circular(50.0),
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(50.0),
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: icon,
         ),
       ),
     );

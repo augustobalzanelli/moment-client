@@ -14,8 +14,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: GoogleFonts.manrope().fontFamily,
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          background: Colors.white,
+        ),
       ),
-      home: Scaffold(
+      home: const Scaffold(
         body: SplashScreen(),
       ),
     );

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:moment/features/authentication/presentation/views/authentication_view.dart';
-import 'package:moment/main.dart';
+import 'package:moment/features/authentication/presentation/views/welcome_view.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -24,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Future.delayed(composition.duration).then((_) {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => AuthenticationView()),
+                MaterialPageRoute(builder: (context) => const WelcomeView()),
               );
             });
           },
