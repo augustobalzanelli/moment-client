@@ -48,10 +48,12 @@ class AFilledButton extends StatelessWidget {
 class ATextButton extends StatelessWidget {
   final String title;
   final double? titleSize;
+  final VoidCallback onTap;
 
   const ATextButton({
     required this.title,
     this.titleSize,
+    required this.onTap,
     super.key,
   });
 
@@ -59,11 +61,14 @@ class ATextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Ink(
       height: AButtonStyles.height,
-      child: Center(
-        child: Text(
-          title,
-          style: TextStyle(
-            fontSize: titleSize ?? AButtonStyles.fontSize,
+      child: InkWell(
+        onTap: onTap,
+        child: Center(
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: titleSize ?? AButtonStyles.fontSize,
+            ),
           ),
         ),
       ),

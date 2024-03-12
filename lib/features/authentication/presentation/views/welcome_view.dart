@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:moment/core/constants/lottie_assets.dart';
 import 'package:moment/features/authentication/presentation/views/authentication_view.dart';
+import 'package:moment/features/authentication/presentation/views/registration_view.dart';
 import 'package:moment/shared/widgets/buttons.dart';
 
 class WelcomeView extends StatelessWidget {
@@ -65,7 +66,15 @@ class WelcomeView extends StatelessWidget {
                         },
                         title: 'Continuar',
                       ),
-                      const ATextButton(
+                      ATextButton(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const RegistrationView(),
+                            ),
+                          );
+                        },
                         title: 'Primeira vez? Registre-se!',
                         titleSize: 14.0,
                       ),

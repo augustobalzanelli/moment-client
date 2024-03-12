@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
+import 'package:moment/core/constants/lottie_assets.dart';
+import 'package:moment/features/authentication/presentation/views/registration_view.dart';
 import 'package:moment/shared/widgets/buttons.dart';
 
-class AuthenticationView extends StatelessWidget {
-  const AuthenticationView({Key? key}) : super(key: key);
+class VerificationView extends StatelessWidget {
+  const VerificationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +21,7 @@ class AuthenticationView extends StatelessWidget {
     return PreferredSize(
       preferredSize: const Size.fromHeight(120.0),
       child: AppBar(
+        scrolledUnderElevation: 0,
         automaticallyImplyLeading: false,
         flexibleSpace: Align(
           alignment: Alignment.centerLeft,
@@ -66,14 +71,18 @@ class AuthenticationView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 12.0),
-                    _buildHeaderText('Sentimos sua falta!', 32.0),
+                    _buildHeaderText('Verifique sua conta!', 32.0),
                     const SizedBox(height: 12.0),
                     _buildHeaderText(
-                        'Preencha seus dados para acessar sua conta.', 14.0),
+                        'Informe o código que acabamos de enviar para balzanelli@proton.me.',
+                        14.0),
                     const SizedBox(height: 24.0),
-                    _buildTextField(' Usuário ', false),
-                    const SizedBox(height: 12.0),
-                    _buildTextField(' Senha ', true),
+                    Stack(
+                      children: [
+                        Lottie.asset(ALottieAssets.mail),
+                        _buildTextField('Código', false),
+                      ],
+                    ),
                     const SizedBox(height: 24.0),
                   ],
                 ),
@@ -96,7 +105,7 @@ class AuthenticationView extends StatelessWidget {
     );
   }
 
-  Widget _buildTextField(String label, bool isObscure) {
+  Widget _buildTextField(String hint, bool isObscure) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.0),
@@ -104,18 +113,22 @@ class AuthenticationView extends StatelessWidget {
       ),
       child: TextField(
         obscureText: isObscure,
+        textAlign: TextAlign.center,
+        keyboardType: TextInputType.number,
         decoration: InputDecoration(
           filled: true,
           fillColor: Colors.white,
+          hintText: hint,
+          hintStyle: TextStyle(color: Colors.grey),
           border: _inputBorder(),
           enabledBorder: _inputBorder(),
           focusedBorder: _inputBorder(),
-          labelText: label,
-          labelStyle: const TextStyle(
-            backgroundColor: Colors.white,
-            color: Colors.grey,
-          ),
+          counterText: '',
         ),
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.digitsOnly,
+        ],
+        maxLength: 6,
       ),
     );
   }
@@ -135,15 +148,22 @@ class AuthenticationView extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const AuthenticationView(),
+                builder: (context) => const RegistrationView(),
               ),
             );
           },
-          title: 'Entrar na conta',
+          title: 'Verificar conta',
         ),
         ATextButton(
-          onTap: () {},
-          title: 'Esqueceu sua senha? Recupere-a!',
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const RegistrationView(),
+              ),
+            );
+          },
+          title: 'E-mail errado? Arrume!',
           titleSize: 14.0,
         ),
       ],

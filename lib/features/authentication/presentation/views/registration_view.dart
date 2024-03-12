@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:moment/features/authentication/presentation/views/authentication_view.dart';
+import 'package:moment/features/authentication/presentation/views/verification_view.dart';
 import 'package:moment/shared/widgets/buttons.dart';
 
-class AuthenticationView extends StatelessWidget {
-  const AuthenticationView({Key? key}) : super(key: key);
+class RegistrationView extends StatelessWidget {
+  const RegistrationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +19,7 @@ class AuthenticationView extends StatelessWidget {
     return PreferredSize(
       preferredSize: const Size.fromHeight(120.0),
       child: AppBar(
+        scrolledUnderElevation: 0,
         automaticallyImplyLeading: false,
         flexibleSpace: Align(
           alignment: Alignment.centerLeft,
@@ -66,14 +69,17 @@ class AuthenticationView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 12.0),
-                    _buildHeaderText('Sentimos sua falta!', 32.0),
+                    _buildHeaderText('Preencha seus dados', 32.0),
                     const SizedBox(height: 12.0),
-                    _buildHeaderText(
-                        'Preencha seus dados para acessar sua conta.', 14.0),
+                    _buildHeaderText('Informe os campos abaixos.', 14.0),
                     const SizedBox(height: 24.0),
+                    _buildTextField(' Nome ', false),
+                    const SizedBox(height: 12.0),
                     _buildTextField(' Usuário ', false),
                     const SizedBox(height: 12.0),
                     _buildTextField(' Senha ', true),
+                    const SizedBox(height: 12.0),
+                    _buildTextField(' Confirmação de senha ', true),
                     const SizedBox(height: 24.0),
                   ],
                 ),
@@ -135,15 +141,22 @@ class AuthenticationView extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
+                builder: (context) => const VerificationView(),
+              ),
+            );
+          },
+          title: 'Criar conta',
+        ),
+        ATextButton(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
                 builder: (context) => const AuthenticationView(),
               ),
             );
           },
-          title: 'Entrar na conta',
-        ),
-        ATextButton(
-          onTap: () {},
-          title: 'Esqueceu sua senha? Recupere-a!',
+          title: 'Já possui conta? Faça login!',
           titleSize: 14.0,
         ),
       ],
